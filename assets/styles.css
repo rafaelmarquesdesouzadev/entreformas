@@ -1,0 +1,639 @@
+:root{--prof:#123B5D;--med:#1F5F8B;--claro:#4D9AC4;--grafite:#202428;--cinza:#666C71;
+  --off:#F7F9FB;--borda:#DDE4EA;--azt:#C2D4E2}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--grafite);background:#fff;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.mt{font-family:Montserrat,system-ui,sans-serif;font-weight:600}
+.wrap{width:min(1320px,90vw);margin:0 auto}
+.lbl{font-family:Montserrat;font-size:9.5px;font-weight:700;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--med)}
+.lbl.cl{color:var(--claro)}
+.lbl.cz{color:var(--cinza)}
+.vazio{border-bottom:1px dashed #7B90A4;color:var(--cinza)}
+
+/* ---------------- nav ---------------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:18px 0;
+  transition:background .35s ease,padding .35s ease}
+nav.solida{background:rgba(255,255,255,.96);padding:12px 0;border-bottom:1px solid var(--borda)}
+nav .row{display:flex;align-items:center;gap:14px}
+nav .marca{display:flex;align-items:center;gap:10px}
+nav .marca span{font-family:Montserrat;font-weight:800;font-size:12.5px;letter-spacing:.2em;
+  color:#fff}
+nav ul{list-style:none;display:flex;gap:30px;margin-left:auto}
+nav ul a{font-family:Montserrat;font-size:10.5px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--azt)}
+nav ul a:hover{color:#fff}
+nav.solida .marca span{color:var(--prof)}
+nav.solida ul a{color:var(--cinza)}
+nav.solida ul a:hover{color:var(--prof)}
+
+
+
+/* símbolo */
+.sym{position:relative;flex:none}
+.sym i{position:absolute;display:block}
+/* geometria oficial: claro = a, medio = 1,26a deslocado 0,53a,
+   vazio = a propria area de sobreposicao (0,47a), caixa = 1,79a */
+.sym .a{background:var(--claro);left:0;top:0;width:55.9%;height:55.9%}
+.sym .b{background:var(--med);left:29.6%;top:29.6%;width:70.4%;height:70.4%}
+.sym .c{background:#fff;left:29.6%;top:29.6%;width:26.3%;height:26.3%}
+nav.solida .sym .c,nav.escura .sym .c{background:#fff}
+.sym.build .a{animation:sa .9s .1s cubic-bezier(.16,1,.3,1) both}
+.sym.build .b{animation:sb .9s .25s cubic-bezier(.16,1,.3,1) both}
+.sym.build .c{animation:sc .5s .95s cubic-bezier(.16,1,.3,1) both}
+@keyframes sa{from{transform:translate(-80%,-80%);opacity:0}to{transform:none;opacity:1}}
+@keyframes sb{from{transform:translate(60%,60%);opacity:0}to{transform:none;opacity:1}}
+@keyframes sc{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ---------------- abertura declarativa ---------------- */
+.abertura{min-height:100svh;background:var(--prof);color:#fff;display:flex;align-items:center;
+  position:relative;overflow:hidden}
+.abertura .g{position:absolute;inset:-2px;background-image:
+  linear-gradient(to right,#19486E 1px,transparent 1px),
+  linear-gradient(to bottom,#19486E 1px,transparent 1px);background-size:30px 30px}
+.abertura .in{position:relative;z-index:2;padding:130px 0 96px}
+.abertura .sym{width:56px;height:56px}
+.abertura .marcao{margin-top:34px;font-family:Montserrat;font-weight:800;
+  font-size:clamp(32px,6.4vw,90px);line-height:1;letter-spacing:.13em;
+  animation:up 1s .35s cubic-bezier(.16,1,.3,1) both}
+.abertura .descritor{margin-top:20px;font-family:Montserrat;font-weight:500;
+  font-size:clamp(10px,1.05vw,13px);letter-spacing:.3em;color:var(--claro);
+  animation:up 1s .5s cubic-bezier(.16,1,.3,1) both}
+.abertura .fio-abre{height:1px;background:rgba(255,255,255,.25);margin:30px 0 26px;
+  max-width:640px;transform-origin:left;
+  animation:cresce 1.8s 2.5s cubic-bezier(.22,1,.28,1) both}
+@keyframes cresce{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.abertura .frase{font-family:Montserrat;font-weight:600;font-size:clamp(16px,1.65vw,22px);
+  line-height:1.5;max-width:46ch;color:#fff;
+  animation:up 1s .8s cubic-bezier(.16,1,.3,1) both}
+.abertura .frase em{font-style:normal;color:var(--claro)}
+.abertura .assin{margin-top:38px;display:flex;flex-wrap:wrap;gap:10px 30px;
+  border-top:1px solid rgba(255,255,255,.2);padding-top:18px;max-width:760px;
+  animation:up 1s .7s cubic-bezier(.16,1,.3,1) both}
+.abertura .assin span{font-size:13.5px;color:var(--azt)}
+.abertura .assin b{font-family:Montserrat;font-weight:600;font-size:13.5px;color:#fff}
+.abertura .desce{position:absolute;bottom:24px;left:0;right:0;text-align:center;
+  font-family:Montserrat;font-size:10px;letter-spacing:.26em;color:var(--azt);
+  animation:pisca 2.8s 1.6s infinite}
+@keyframes pisca{0%,100%{opacity:.35}50%{opacity:1}}
+
+/* ---------------- obra em destaque ---------------- */
+.destaque{position:relative}
+.destaque .foto{aspect-ratio:21/9;overflow:hidden;background:#e9e6e0}
+.destaque .foto img{width:100%;height:100%;object-fit:cover}
+.destaque .sob{padding:26px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px}
+.destaque h2{font-size:clamp(22px,2.6vw,34px);font-weight:600;color:var(--prof)}
+.destaque .tipo{font-size:14.5px;color:var(--cinza)}
+.destaque .ver{margin-left:auto;font-family:Montserrat;font-size:10.5px;font-weight:700;
+  letter-spacing:.18em;color:var(--prof);border-bottom:1px solid var(--claro);padding-bottom:5px}
+
+/* ---------------- folhas verticais ---------------- */
+.folha{padding:clamp(78px,10vw,150px) 0}
+.folha.off{background:var(--off)}
+.dupla{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(22px,5vw,80px);
+  align-items:start}
+.dupla .esq{position:sticky;top:96px}
+h3.tit{font-size:clamp(24px,3.6vw,46px);font-weight:600;line-height:1.1;color:var(--prof);
+  letter-spacing:-.014em;margin-top:10px}
+.corpo{font-size:clamp(15.5px,1.28vw,18.5px);line-height:1.82;color:#3a4045;max-width:58ch}
+.corpo+.corpo{margin-top:20px}
+.dados{margin-top:44px;border-top:1px solid var(--borda)}
+.dados .lin{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,7fr);gap:20px;
+  padding:14px 0;border-bottom:1px solid var(--borda)}
+.dados .lin .k{font-family:Montserrat;font-size:10px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--med);padding-top:3px}
+.dados .lin .v{font-size:15px;line-height:1.7;color:var(--grafite)}
+
+/* ---------------- percurso horizontal ---------------- */
+.percurso{position:relative;background:var(--prof);color:#fff}
+.pino{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column}
+.pcab{display:flex;align-items:center;gap:16px;padding:28px clamp(20px,5vw,62px) 0}
+.pcab .conta{margin-left:auto;font-family:Montserrat;font-weight:700;font-size:11.5px;
+  letter-spacing:.18em}
+.pbarra{height:1px;background:rgba(255,255,255,.2);margin:14px clamp(20px,5vw,62px) 0}
+.pbarra i{display:block;height:1px;width:0;background:var(--claro)}
+.trilha{flex:1;display:flex;align-items:center;will-change:transform}
+.painel{flex:none;width:clamp(300px,32vw,440px);padding:0 clamp(20px,3.2vw,54px);
+  border-left:1px solid rgba(255,255,255,.14);align-self:stretch;display:flex;
+  flex-direction:column;justify-content:center}
+.painel:first-child{border-left:0}
+.painel .k{font-family:Montserrat;font-weight:700;font-size:clamp(11px,1vw,12px);
+  letter-spacing:.2em;color:var(--claro)}
+.painel h4{margin-top:16px;font-family:Montserrat;font-weight:600;
+  font-size:clamp(19px,1.85vw,26px);line-height:1.24}
+.painel p{margin-top:14px;font-size:14.5px;line-height:1.75;color:var(--azt);max-width:38ch}
+.painel .ent{margin-top:24px;border-top:1px solid rgba(255,255,255,.16);padding-top:14px;
+  display:grid;gap:7px}
+.painel .ent div{font-size:13px;color:#fff;display:grid;grid-template-columns:6px 1fr;
+  gap:11px;align-items:start}
+.painel .ent div::before{content:"";width:5px;height:5px;background:var(--claro);
+  margin-top:.62em}
+.painel.abre h4{font-size:clamp(23px,2.9vw,38px);letter-spacing:-.01em}
+.painel.abre .seta{margin-top:30px;display:flex;align-items:center;gap:12px;font-family:Montserrat;
+  font-size:10px;letter-spacing:.2em;color:var(--claro)}
+.painel.abre .seta i{display:block;width:54px;height:1px;background:var(--claro);
+  animation:desliza 1.9s infinite}
+@keyframes desliza{0%{transform:scaleX(.25);transform-origin:left}
+  60%{transform:scaleX(1);transform-origin:left}100%{transform:scaleX(.25);transform-origin:left}}
+.painel.fecho{width:clamp(320px,38vw,540px)}
+.mini{margin-top:20px;border:1px solid rgba(255,255,255,.2)}
+.mini .mh{padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.2);font-family:Montserrat;
+  font-size:10.5px;font-weight:600;letter-spacing:.1em}
+.mg{display:grid;grid-template-columns:98px repeat(8,1fr)}
+.mg>div{border-bottom:1px solid rgba(255,255,255,.12);border-right:1px solid rgba(255,255,255,.12);
+  min-height:25px;display:flex;align-items:center;padding:0 7px;font-size:10px}
+.mg .r{font-family:Montserrat;font-weight:600;font-size:9.5px;letter-spacing:.04em}
+.mg .c{padding:0}
+.bar{height:6px;width:100%;background:var(--med)}
+.bar.l{background:var(--claro)}
+
+/* ---------------- índice de obras ---------------- */
+.indice{border-top:1px solid var(--borda);margin-top:clamp(34px,5vw,56px)}
+.item{display:grid;
+  grid-template-columns:minmax(0,3.2fr) minmax(0,2.4fr) minmax(0,2fr) 74px 132px;
+  gap:18px;align-items:center;padding:18px 4px;border-bottom:1px solid var(--borda);
+  transition:padding-left .3s ease,background .3s ease}
+.item:hover{padding-left:16px;background:#fff}
+.item .nome{font-family:Montserrat;font-weight:600;font-size:clamp(17px,1.6vw,22px);
+  color:var(--prof)}
+.item .meta,.item .loc{font-size:14px;color:var(--cinza)}
+.item .ano{font-family:Montserrat;font-size:12.5px;font-weight:600;color:var(--med);
+  text-align:right}
+.item .pre{width:132px;height:84px;overflow:hidden;background:transparent;
+  opacity:0;transform:scale(.96);transition:opacity .3s ease,transform .3s ease}
+.item:hover .pre{opacity:1;transform:scale(1)}
+.item .pre img{width:100%;height:100%;object-fit:cover;display:block}
+.nota{margin-top:22px;font-size:13px;color:var(--cinza)}
+
+/* ---------------- contato ---------------- */
+.contato{background:var(--prof);color:#fff;padding:clamp(78px,10vw,140px) 0}
+.contato h3.tit{color:#fff}
+.contato .lbl{color:var(--claro)}
+.cgrid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,6vw,90px);
+  margin-top:clamp(34px,5vw,56px)}
+form{display:grid;gap:26px}
+.campo{position:relative}
+.campo label{display:block;font-family:Montserrat;font-size:9.5px;font-weight:700;
+  letter-spacing:.2em;color:var(--claro);margin-bottom:9px;text-transform:uppercase}
+.campo input,.campo select,.campo textarea{width:100%;background:none;border:0;
+  border-bottom:1px solid rgba(255,255,255,.3);color:#fff;font-family:Inter;font-size:16px;
+  padding:6px 0 10px}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;
+  border-color:var(--claro)}
+.campo select option{color:#111}
+.campo textarea{resize:vertical}
+.hp{position:absolute;left:-9999px}
+button.env{justify-self:start;margin-top:6px;background:none;border:1px solid rgba(255,255,255,.5);
+  color:#fff;font-family:Montserrat;font-weight:700;font-size:10.5px;letter-spacing:.2em;
+  padding:16px 30px;cursor:pointer;transition:background .25s ease,color .25s ease}
+button.env:hover{background:#fff;color:var(--prof)}
+.erro{font-size:13px;color:#FFB4B4}
+.canais .lin{border-bottom:1px solid rgba(255,255,255,.18);padding:16px 0}
+.canais .lin:first-child{border-top:1px solid rgba(255,255,255,.18)}
+.canais .k{font-family:Montserrat;font-size:9.5px;font-weight:700;letter-spacing:.2em;
+  color:var(--claro);text-transform:uppercase}
+.canais .v{margin-top:7px;font-size:16.5px}
+.canais a:hover{color:var(--claro)}
+
+footer{background:#0D2C46;color:#A3B8CC;padding:30px 0;font-size:12.5px}
+footer .row{display:flex;flex-wrap:wrap;gap:12px 26px}
+footer .dir{margin-left:auto}
+footer a:hover{color:#fff}
+.zap{position:fixed;right:20px;bottom:20px;z-index:45;border:1px solid var(--claro);
+  background:rgba(18,59,93,.92);color:#fff;padding:13px 18px;font-family:Montserrat;
+  font-weight:700;font-size:10.5px;letter-spacing:.16em;transition:background .25s}
+.zap:hover{background:var(--claro);color:var(--prof)}
+
+/* ---------------- página de obra ---------------- */
+.capa{background:var(--prof);color:#fff;padding:132px 0 56px;position:relative;overflow:hidden}
+.capa .g{position:absolute;inset:-2px;background-image:
+  linear-gradient(to right,#19486E 1px,transparent 1px),
+  linear-gradient(to bottom,#19486E 1px,transparent 1px);background-size:30px 30px}
+.capa .in{position:relative;z-index:2}
+.capa h1{font-size:clamp(27px,4.4vw,54px);font-weight:600;letter-spacing:-.014em}
+.capa .tipo{margin-top:14px;font-size:15px;color:var(--azt)}
+.coluna{display:grid;gap:14px;padding:clamp(34px,5vw,64px) 0}
+.coluna .cel{overflow:hidden;background:#e9e6e0}
+.coluna .cel img{width:100%;height:auto}
+.coluna .par{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.info{border-top:1px solid var(--borda);padding-top:clamp(34px,4vw,56px)}
+.info .cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(24px,5vw,80px)}
+.creditos{margin-top:38px;border-top:1px solid var(--borda);padding-top:20px;
+  display:grid;gap:10px}
+.creditos div{font-size:14px;color:#3a4045}
+.creditos b{font-family:Montserrat;font-weight:600;color:var(--prof)}
+.volta{display:inline-block;margin-top:40px;font-family:Montserrat;font-size:10.5px;
+  font-weight:700;letter-spacing:.18em;color:var(--prof);border-bottom:1px solid var(--claro);
+  padding-bottom:5px}
+
+@media(max-width:940px){
+  .dupla,.cgrid,.info .cols{grid-template-columns:1fr}
+  .dupla .esq{position:static}
+  .destaque .foto{aspect-ratio:4/3}
+  .item{grid-template-columns:1fr auto;gap:6px}
+  .item .meta,.item .loc{grid-column:1}
+  .item .ano{grid-row:1;grid-column:2}
+  .item .pre{display:none}
+  .coluna .par{grid-template-columns:1fr}
+  nav ul{gap:16px}
+  nav ul a{font-size:9.5px;letter-spacing:.12em}
+  .percurso{height:auto!important}
+  .pino{position:static;height:auto;padding-bottom:34px}
+  .trilha{overflow-x:auto;scroll-snap-type:x mandatory;transform:none!important;padding:0 20px}
+  .painel{width:84vw;scroll-snap-align:start;padding:32px 22px}
+  .painel.fecho{width:92vw}
+}
+@media(prefers-reduced-motion:reduce){
+  .abertura .marcao,.abertura .descritor,.abertura .fio-abre,.abertura .frase,
+  .abertura .assin,.sym.build i,.painel.abre .seta i,.abertura .desce{animation:none}
+}
+
+/* ================= v3: páginas separadas, PT/EN, FAQ, documentos ========= */
+nav .idioma{background:none;border:1px solid rgba(255,255,255,.35);color:var(--azt);
+  font-family:Montserrat;font-weight:700;font-size:9.5px;letter-spacing:.14em;
+  padding:8px 11px;cursor:pointer;margin-left:22px}
+nav .idioma:hover{color:#fff;border-color:#fff}
+nav.solida .idioma{border-color:var(--borda);color:var(--cinza)}
+nav.solida .idioma:hover{color:var(--prof);border-color:var(--med)}
+nav ul a[aria-current]{color:#fff;border-bottom:1px solid var(--claro);padding-bottom:3px}
+nav.solida ul a[aria-current]{color:var(--prof);border-color:var(--med)}
+
+/* cartões de navegação no fim da home */
+.portas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;
+  margin-top:clamp(34px,5vw,56px)}
+.porta{border:1px solid var(--borda);padding:26px 24px 30px;background:#fff;
+  transition:border-color .25s ease,transform .25s ease;display:block}
+.porta:hover{border-color:var(--med);transform:translateY(-3px)}
+.porta .n{font-family:Montserrat;font-weight:700;font-size:10px;letter-spacing:.2em;
+  color:var(--claro)}
+.porta h3{margin:14px 0 10px;font-family:Montserrat;font-size:21px;font-weight:600;
+  color:var(--prof)}
+.porta p{font-size:14px;line-height:1.7;color:#4a5055}
+.porta .seta{display:inline-block;margin-top:16px;font-family:Montserrat;font-weight:700;
+  font-size:10.5px;letter-spacing:.16em;color:var(--med)}
+
+/* parágrafo de leitura dirigida */
+.dirigido{font-family:Montserrat;font-weight:600;font-size:clamp(21px,2.9vw,38px);
+  line-height:1.28;letter-spacing:-.01em;color:var(--prof);max-width:30ch}
+.dirigido .fraco{color:#A9BACA}
+
+/* tabela comparativa */
+.compara{margin-top:clamp(30px,4vw,52px);border-top:1px solid var(--borda)}
+.compara .lin{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,4.5fr) minmax(0,4.5fr);
+  gap:18px;padding:18px 0;border-bottom:1px solid var(--borda)}
+.compara .cab{background:var(--off)}
+.compara .k{font-family:Montserrat;font-size:10px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--med);padding-top:3px}
+.compara .a,.compara .b{font-size:14.5px;line-height:1.7}
+.compara .a{color:var(--prof);font-weight:500}
+.compara .b{color:var(--cinza)}
+.compara .cab .a,.compara .cab .b{font-family:Montserrat;font-weight:600;font-size:13px;
+  color:var(--prof)}
+.ressalva{margin-top:26px;border-left:3px solid var(--claro);padding:6px 0 6px 20px;
+  font-size:14.5px;line-height:1.75;color:#4a5055;max-width:70ch}
+
+/* documentos desenhados */
+.doc{margin-top:clamp(28px,4vw,44px);background:#fff;border:1px solid var(--borda)}
+.doc .dh{padding:16px 20px;border-bottom:1px solid var(--borda);display:flex;
+  flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.doc .dh .t{font-family:Montserrat;font-weight:600;font-size:15px;color:var(--prof)}
+.doc .dh .s{font-size:12.5px;color:var(--cinza);margin-left:auto}
+.gantt{display:grid;grid-template-columns:150px repeat(8,1fr)}
+.gantt>div{border-bottom:1px solid #EDF2F6;border-right:1px solid #EDF2F6;min-height:40px;
+  display:flex;align-items:center;padding:0 10px;font-size:12px}
+.gantt .th{background:#F4F7FA;font-family:Montserrat;font-weight:700;font-size:9.5px;
+  letter-spacing:.12em;color:var(--med);justify-content:center;min-height:32px}
+.gantt .th.l{justify-content:flex-start}
+.gantt .r{font-family:Montserrat;font-weight:600;font-size:11.5px;color:var(--prof)}
+.gantt .c{padding:0}
+.gantt .bar{height:8px;width:100%;background:var(--med)}
+.gantt .bar.l{background:var(--claro)}
+.gantt .bar.d{background:var(--prof)}
+.planilha{width:100%;border-collapse:collapse}
+.planilha th{background:var(--prof);color:#fff;font-family:Montserrat;font-size:9.5px;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:11px 10px;
+  text-align:left}
+.planilha td{border-bottom:1px solid #EDF2F6;padding:11px 10px;font-size:13.5px}
+.planilha td.n{text-align:right;font-family:Montserrat;font-weight:500}
+.planilha tr:last-child td{border-bottom:0;font-family:Montserrat;font-weight:700;
+  color:var(--prof);background:var(--off)}
+.doc .dp{padding:14px 20px;font-size:12.5px;color:var(--cinza);border-top:1px solid var(--borda)}
+.doc-txt{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;
+  margin-top:26px}
+.doc-txt div{border-top:2px solid var(--prof);padding-top:14px}
+.doc-txt h4{font-family:Montserrat;font-size:14.5px;font-weight:600;color:var(--prof);
+  margin-bottom:8px}
+.doc-txt p{font-size:13.5px;line-height:1.7;color:#4a5055}
+
+/* dúvidas */
+.faq{margin-top:clamp(30px,4vw,50px);border-top:1px solid var(--borda)}
+.faq details{border-bottom:1px solid var(--borda)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;position:relative;
+  font-family:Montserrat;font-weight:600;font-size:16.5px;color:var(--prof)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:16px;font-family:Montserrat;
+  font-weight:600;font-size:22px;color:var(--claro)}
+.faq details[open] summary::after{content:"–"}
+.faq .resp{padding:0 60px 22px 0;font-size:15px;line-height:1.8;color:#4a5055}
+
+/* selos de contato */
+.selos{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px}
+.selos span{font-family:Montserrat;font-size:11px;font-weight:700;letter-spacing:.12em;
+  color:var(--claro);border:1px solid rgba(255,255,255,.3);padding:9px 14px}
+.passos{margin-top:clamp(34px,5vw,54px);display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.passo{border-top:1px solid rgba(255,255,255,.25);padding-top:16px}
+.passo .n{font-family:Montserrat;font-weight:800;font-size:22px;color:var(--claro)}
+.passo h4{margin:10px 0 8px;font-family:Montserrat;font-size:15.5px;font-weight:600;color:#fff}
+.passo p{font-size:13.5px;line-height:1.7;color:var(--azt)}
+
+@media(max-width:940px){
+  .compara .lin{grid-template-columns:1fr;gap:8px}
+  .compara .k{color:var(--prof)}
+  .gantt{grid-template-columns:110px repeat(8,1fr)}
+  .gantt .r{font-size:10.5px}
+  nav .idioma{margin-left:10px}
+}
+
+/* ============ correções: cartões das frentes, reveal e pós-envio ========= */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;
+  margin-top:clamp(30px,4vw,48px)}
+.card{background:#fff;border:1px solid var(--borda);border-top:3px solid var(--prof);
+  padding:24px 20px 26px}
+.card .n{font-family:Montserrat;font-weight:800;font-size:25px;color:var(--claro);line-height:1}
+.card h3{margin:13px 0 15px;font-size:12.5px;font-weight:700;letter-spacing:.14em;
+  color:var(--prof)}
+.card ul{list-style:none;font-size:13.5px;line-height:1.85;color:#4a5055}
+.card li{display:grid;grid-template-columns:6px 1fr;gap:11px;align-items:start}
+.card li::before{content:"";width:5px;height:5px;background:var(--med);margin-top:.66em}
+.off .card{background:#fff}
+
+/* reveal discreto (o JS adiciona .in ao entrar na tela) */
+.rv{opacity:0;transform:translateY(26px);
+  transition:opacity .6s cubic-bezier(.2,.8,.2,1) var(--d,0s),
+             transform .6s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* página de agradecimento */
+.capa .inner .lead{color:var(--azt);max-width:52ch;margin-top:18px}
+.capa .acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.capa .acoes a{text-decoration:none;padding:15px 24px;font-family:Montserrat;font-weight:700;
+  font-size:11.5px;letter-spacing:.14em}
+.capa .acoes .p{background:var(--claro);color:#0B2A44}
+.capa .acoes .s{border:1px solid rgba(255,255,255,.4);color:#fff}
+
+/* ============ páginas de obra: etapas e execução ============ */
+.etapa-cab{display:flex;align-items:baseline;gap:16px;margin:clamp(26px,4vw,46px) 0 4px;
+  border-top:1px solid var(--borda);padding-top:18px}
+.tag-etapa{font-family:Montserrat;font-size:9.5px;font-weight:700;letter-spacing:.2em;
+  color:#fff;background:var(--med);padding:6px 10px}
+.etapa-t{font-family:Montserrat;font-weight:600;font-size:clamp(17px,1.7vw,22px);
+  color:var(--prof)}
+ul.exec{list-style:none;margin-top:20px;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px 24px}
+ul.exec li{display:grid;grid-template-columns:7px 1fr;gap:12px;align-items:start;
+  font-size:14.5px;line-height:1.9;color:#3a4045}
+ul.exec li::before{content:"";width:6px;height:6px;background:var(--claro);margin-top:.72em}
+.item .nome .vazio{font-weight:400;font-size:.8em;color:var(--cinza)}
+.canteiro{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  margin-top:clamp(30px,4vw,48px)}
+.canteiro .cel{overflow:hidden;aspect-ratio:4/3;background:#e9e6e0}
+.canteiro .cel img{width:100%;height:100%;object-fit:cover}
+@media(max-width:940px){.canteiro{grid-template-columns:repeat(2,1fr)}}
+
+/* ============ carrossel da obra em destaque ============ */
+.destaque-cab{display:flex;align-items:center;gap:20px}
+.pontos{display:flex;gap:8px;margin-left:auto}
+.pontos .pt{width:9px;height:9px;padding:0;border:1px solid var(--med);background:none;
+  cursor:pointer;transition:background .3s ease}
+.pontos .pt.on{background:var(--med)}
+.carrossel{position:relative;margin-top:22px}
+.carrossel .slide{position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity .7s ease,visibility .7s;display:grid;
+  grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.carrossel .slide.on{position:relative;opacity:1;visibility:visible}
+.carrossel .foto{overflow:hidden;background:#e9e6e0;aspect-ratio:4/3}
+.carrossel .foto img{width:100%;height:100%;object-fit:cover;display:block}
+.painel-obra{background:var(--prof);color:#fff;padding:clamp(26px,3.4vw,48px);
+  display:flex;flex-direction:column;justify-content:center}
+.painel-obra .n{font-family:Montserrat;font-weight:800;font-size:13px;letter-spacing:.2em;
+  color:var(--claro)}
+.painel-obra h2{margin-top:14px;font-family:Montserrat;font-weight:600;color:#fff;
+  font-size:clamp(23px,2.5vw,34px);line-height:1.15}
+.ficha-rapida{margin-top:22px;border-top:1px solid rgba(255,255,255,.22);display:grid;gap:1px}
+.ficha-rapida span{border-bottom:1px solid rgba(255,255,255,.14);padding:10px 0;
+  font-size:14.5px;color:var(--azt)}
+.painel-obra .ver{margin-top:26px;align-self:flex-start;font-family:Montserrat;font-size:10.5px;
+  font-weight:700;letter-spacing:.18em;color:#fff;border-bottom:1px solid var(--claro);
+  padding-bottom:6px}
+.carrossel .slide:hover .ver{border-color:#fff}
+@media(max-width:900px){
+  .carrossel .slide{grid-template-columns:1fr}
+  .carrossel .foto{aspect-ratio:3/2}
+}
+@media(prefers-reduced-motion:reduce){.carrossel .slide{transition:none}}
+
+/* ================= home: porta de entrada estática ================= */
+html:has(body.portal),body.portal{height:100%;overflow:hidden}
+.capa-portal{position:relative;height:100dvh;min-height:100svh;background:var(--prof);
+  color:#fff;display:grid;grid-template-rows:1fr auto;overflow:hidden}
+.capa-portal .g{position:absolute;inset:-2px;background-image:
+  linear-gradient(to right,#19486E 1px,transparent 1px),
+  linear-gradient(to bottom,#19486E 1px,transparent 1px);background-size:30px 30px}
+.portal-corpo{position:relative;z-index:2;width:min(1320px,88vw);margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;
+  gap:clamp(24px,5vw,80px);height:100%}
+
+.marca-bloco{position:relative;z-index:3}
+.marca-bloco .sym{display:block;width:clamp(40px,min(4vw,6vh),62px);aspect-ratio:1;
+  margin-bottom:clamp(16px,3vh,34px)}
+.marca-bloco .marcao{font-family:Montserrat;font-weight:800;letter-spacing:.13em;line-height:1;
+  font-size:clamp(24px,min(5.4vw,8vh),58px);
+  animation:up 1.6s 1.5s cubic-bezier(.22,1,.28,1) both}
+.marca-bloco .descritor{margin-top:clamp(10px,1.6vh,18px);font-family:Montserrat;font-weight:500;
+  font-size:clamp(8.5px,min(.82vw,1.4vh),12px);letter-spacing:.3em;color:var(--claro);
+  animation:up 1.6s 2.1s cubic-bezier(.22,1,.28,1) both}
+.marca-bloco .fio-abre{height:1px;background:rgba(255,255,255,.25);
+  margin:clamp(20px,3vh,34px) 0 clamp(16px,2.4vh,26px);max-width:380px;transform-origin:left;
+  animation:cresce 1.8s 2.2s cubic-bezier(.22,1,.28,1) both}
+.marca-bloco .frase{font-family:Montserrat;font-weight:600;line-height:1.5;
+  font-size:clamp(13px,min(1.25vw,2.1vh),18px);max-width:36ch;color:var(--claro);
+  letter-spacing:.01em;animation:up 1.6s 2.7s cubic-bezier(.22,1,.28,1) both}
+
+.menu-portal{display:grid;justify-items:end;text-align:right;
+  animation:up 1s .95s cubic-bezier(.16,1,.3,1) both}
+.menu-portal a{display:block;text-decoration:none;padding:clamp(9px,1.7vh,20px) 0;
+  border-bottom:1px solid rgba(255,255,255,.16);width:min(46vw,420px);
+  transition:padding-right .3s ease,border-color .3s ease}
+.menu-portal a:first-child{border-top:1px solid rgba(255,255,255,.16)}
+.menu-portal a:hover{padding-right:14px;border-color:var(--claro)}
+.menu-portal .n{font-family:Montserrat;font-weight:800;font-size:10px;letter-spacing:.2em;
+  color:var(--claro);margin-right:12px;vertical-align:middle}
+.menu-portal .t{font-family:Montserrat;font-weight:600;color:#fff;
+  font-size:clamp(19px,min(2.4vw,4vh),34px);transition:color .3s ease}
+.menu-portal a:hover .t{color:var(--claro)}
+.menu-portal .d{display:block;margin-top:4px;font-size:clamp(11.5px,min(.95vw,1.6vh),14px);
+  color:var(--azt);line-height:1.5}
+
+.rodape-portal{position:relative;z-index:2;width:min(1320px,88vw);margin:0 auto;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;color:#A8C0D4;
+  font-size:clamp(10.5px,1.4vh,12.5px);padding-bottom:clamp(14px,3vh,30px)}
+.rodape-portal .meio{margin-left:auto}
+.rodape-portal a{color:#A8C0D4;text-decoration:none}
+.rodape-portal a:hover{color:#fff}
+.rodape-portal .idioma{background:none;border:1px solid rgba(255,255,255,.35);color:var(--azt);
+  font-family:Montserrat;font-weight:700;font-size:9.5px;letter-spacing:.14em;padding:7px 11px;
+  cursor:pointer}
+.rodape-portal .idioma:hover{color:#fff;border-color:#fff}
+
+@media(max-width:640px){
+  html:has(body.portal),body.portal{overflow-y:auto}
+  .capa-portal{height:auto;min-height:100svh;padding-top:56px}
+  .portal-corpo{grid-template-columns:1fr;align-content:center;gap:38px}
+  .menu-portal{justify-items:stretch;text-align:left}
+  .menu-portal a{width:100%}
+  .rodape-portal .meio{margin-left:0}
+}
+
+/* ============ navegação numerada e próximo passo ============ */
+nav ul a .num{font-family:Montserrat;font-weight:800;font-size:9px;letter-spacing:.12em;
+  color:var(--claro);margin-right:7px;vertical-align:1px}
+nav.solida ul a .num{color:var(--med)}
+.proximo{background:var(--prof);color:#fff}
+.proximo.alt{background:var(--med)}
+.proximo .wrap{display:grid;grid-template-columns:auto 1fr auto;column-gap:clamp(16px,2.4vw,30px);
+  align-items:baseline;padding:clamp(34px,4.4vw,58px) 0;text-decoration:none;
+  transition:padding-left .3s ease}
+.proximo .wrap:hover{padding-left:14px}
+.proximo .rot{grid-column:1/-1;font-family:Montserrat;font-weight:700;font-size:9.5px;
+  letter-spacing:.24em;color:var(--claro);margin-bottom:18px}
+.proximo.alt .rot{color:#CFE4F1}
+.proximo .n{font-family:Montserrat;font-weight:800;font-size:13px;letter-spacing:.18em;
+  color:var(--claro)}
+.proximo.alt .n{color:#fff}
+.proximo .t{font-family:Montserrat;font-weight:600;color:#fff;font-size:clamp(23px,2.6vw,36px)}
+.proximo .d{grid-column:2;margin-top:10px;font-size:15px;line-height:1.65;color:var(--azt)}
+.proximo.alt .d{color:#E4F0F8}
+.proximo .seta{grid-row:2;font-size:22px;color:var(--claro);transition:transform .3s ease}
+.proximo.alt .seta{color:#fff}
+.proximo .wrap:hover .seta{transform:translateX(8px)}
+
+/* ============ etapas verticais numeradas ============ */
+.etapas-v{background:var(--off)}
+.lista-etapas{margin-top:clamp(34px,5vw,60px);border-top:1px solid var(--borda)}
+.etapa-v{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,270px);
+  gap:clamp(20px,3vw,44px);padding:clamp(30px,4vw,52px) 0;
+  border-bottom:1px solid var(--borda);align-items:start}
+.etapa-v .et-n span{font-family:Montserrat;font-weight:800;font-size:clamp(30px,3.4vw,44px);
+  color:#3C82AE;line-height:1;display:block}
+.et-txt{min-width:0}
+.etapa-v h3{font-family:Montserrat;font-weight:600;color:var(--prof);
+  font-size:clamp(20px,2.1vw,27px);line-height:1.2}
+.etapa-v p{margin-top:14px;font-size:15.5px;line-height:1.8;color:#3a4045;max-width:56ch}
+.etapa-v .et-lbl{margin-top:24px;font-family:Montserrat;font-weight:700;font-size:9.5px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--med)}
+.et-ent{list-style:none;margin-top:12px;display:grid;gap:7px}
+.et-ent li{display:grid;grid-template-columns:6px 1fr;gap:11px;align-items:start;
+  font-size:14.5px;line-height:1.7;color:#3a4045}
+.et-ent li::before{content:"";width:5px;height:5px;background:var(--claro);margin-top:.62em}
+.et-foto{overflow:hidden;aspect-ratio:4/3;background:#e9e6e0}
+.et-foto img{width:100%;height:100%;object-fit:cover}
+
+@media(max-width:900px){
+  .proximo .d{font-size:14px}
+  .etapa-v{grid-template-columns:52px 1fr;gap:16px}
+  .etapa-v .et-foto{grid-column:1/-1;aspect-ratio:16/10;margin-top:8px}
+}
+
+/* ---- entrada do portal: marca primeiro, menu depois ---- */
+.sociais{display:inline-flex;gap:16px;align-items:center;margin-left:20px;
+  animation:up 1.4s 3.4s cubic-bezier(.22,1,.28,1) both}
+.sociais a{display:inline-flex;color:#A8C0D4;transition:color .25s ease,transform .25s ease}
+.sociais a:hover{color:#fff;transform:translateY(-2px)}
+.sociais svg{width:17px;height:17px;fill:currentColor;display:block}
+.idioma.canto{animation:up 1.4s 3.4s cubic-bezier(.22,1,.28,1) both;position:absolute;top:clamp(18px,3.2vh,34px);right:max(6vw,20px);z-index:4;
+  background:none;border:1px solid rgba(255,255,255,.3);color:var(--azt);font-family:Montserrat;
+  font-weight:700;font-size:9.5px;letter-spacing:.14em;padding:8px 12px;cursor:pointer;
+  transition:color .25s ease,border-color .25s ease}
+.idioma.canto:hover{color:#fff;border-color:#fff}
+.menu-portal{opacity:0;transform:translateX(30px);
+  transition:opacity 1.4s cubic-bezier(.22,1,.28,1),transform 1.4s cubic-bezier(.22,1,.28,1);
+  animation:none;pointer-events:none}
+.menu-portal a{opacity:0;transform:translateX(22px);
+  transition:opacity 1.1s cubic-bezier(.22,1,.28,1) var(--d,0s),
+             transform 1.1s cubic-bezier(.22,1,.28,1) var(--d,0s),
+             padding-right .3s ease,border-color .3s ease}
+.menu-portal.revelado{opacity:1;transform:none;pointer-events:auto}
+.menu-portal.revelado a{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .menu-portal,.menu-portal a{opacity:1;transform:none;transition:none;pointer-events:auto}
+  }
+
+/* ================= menu no celular ================= */
+nav .menu{display:none;margin-left:auto;background:none;border:1px solid rgba(255,255,255,.3);
+  color:#fff;font-family:Montserrat;font-weight:700;font-size:9.5px;letter-spacing:.16em;
+  padding:9px 13px;cursor:pointer}
+nav.solida .menu{border-color:var(--borda);color:var(--prof)}
+@media(max-width:860px){
+  nav .menu{display:block}
+  nav ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+    margin:0;padding:6px 5vw 22px;background:rgba(18,59,93,.985);
+    border-bottom:1px solid rgba(255,255,255,.14)}
+  nav.solida ul{background:rgba(255,255,255,.985);border-bottom:1px solid var(--borda)}
+  nav ul.aberto{display:flex}
+  nav ul a{display:block;padding:15px 0;font-size:12px;letter-spacing:.14em;
+    border-bottom:1px solid rgba(255,255,255,.1)}
+  nav.solida ul a{border-color:var(--borda)}
+  nav ul a[aria-current]{border-bottom-color:var(--claro)}
+  nav .idioma{margin-left:12px}
+  nav .marca span{font-size:11px;letter-spacing:.16em}
+}
+
+/* ================= contato: reorganização ================= */
+.linha-selos{margin-top:clamp(22px,3vw,34px);font-family:Montserrat;font-weight:600;
+  font-size:clamp(11px,1.05vw,13px);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--claro);padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.16)}
+.par-campos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,30px)}
+form{gap:20px}
+.campo input,.campo select,.campo textarea{background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.34);
+  padding:12px 13px;transition:border-color .25s ease,background .25s ease}
+.campo input:focus,.campo select:focus,.campo textarea:focus{border-color:var(--claro);
+  background:rgba(255,255,255,.09);outline:none}
+.obs-form{font-size:12.5px;line-height:1.6;color:var(--azt);opacity:.85}
+button.env{background:var(--claro);border:1px solid var(--claro);color:#0B2A44;padding:17px 34px}
+button.env:hover{background:#fff;border-color:#fff;color:var(--prof)}
+.faixa-fotos{background:var(--prof);padding-bottom:clamp(26px,4vw,46px)}
+.tira-fotos{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.tira-fotos .cel{overflow:hidden;aspect-ratio:1;background:#0E3252}
+.tira-fotos .cel img{width:100%;height:100%;object-fit:cover;opacity:.88;
+  transition:opacity .4s ease,transform .6s ease}
+.tira-fotos .cel:hover img{opacity:1;transform:scale(1.03)}
+.legenda-faixa{margin-top:18px;font-size:12.5px;color:var(--azt)}
+@media(max-width:860px){
+  .par-campos{grid-template-columns:1fr;gap:20px}
+  .tira-fotos{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ---- envio do formulário sem servidor ---- */
+.alt-envio{margin-top:14px}
+button.por-email{background:none;border:0;padding:0;cursor:pointer;color:var(--azt);
+  font-family:Inter;font-size:13.5px;border-bottom:1px solid rgba(255,255,255,.35);
+  padding-bottom:2px;transition:color .25s ease,border-color .25s ease}
+button.por-email:hover{color:#fff;border-color:#fff}
+.retorno-envio{margin-top:14px;font-size:13.5px;line-height:1.6;color:var(--claro);min-height:1.2em}
+.retorno-envio.erro-envio{color:#FFC2C2}
+
+/* ---- escultura animada da home: grid → módulos → parede → maquete → logo ---- */
+#escultura{position:absolute;z-index:1;left:50%;top:50%;width:min(680px,52vw);
+  transform:translate(-46%,-50%);opacity:.7;pointer-events:none}
+@media(max-width:960px){
+  #escultura{width:92vw;transform:translate(-50%,-54%);opacity:.34}
+}
+@media(prefers-reduced-motion:reduce){#escultura{opacity:.45}}

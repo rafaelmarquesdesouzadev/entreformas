@@ -1,0 +1,42 @@
+ENTRE FORMAS — publicar no GitHub Pages (gratuito, sem limite de publicações)
+
+1. CRIAR O REPOSITÓRIO
+   github.com > New repository
+   Nome: entreformas
+   Público. Não marque nada além disso. Create repository.
+
+2. SUBIR OS ARQUIVOS
+   Na tela do repositório: "uploading an existing file".
+   Arraste TODO o conteúdo desta pasta (não a pasta, o conteúdo).
+   Inclua também os arquivos CNAME e .nojekyll.
+   Commit changes.
+
+3. LIGAR O PAGES
+   Settings > Pages
+   Source: Deploy from a branch
+   Branch: main · pasta / (root) · Save
+   Em Custom domain já vai aparecer entreformas.arq.br (vem do arquivo CNAME).
+   Marque Enforce HTTPS assim que ficar disponível.
+
+4. APONTAR O DOMÍNIO (registro.br > editar zona DNS)
+   Apague o registro A atual (75.2.60.5) e o CNAME do www.
+   Crie:
+     A   (nome em branco)  185.199.108.153
+     A   (nome em branco)  185.199.109.153
+     A   (nome em branco)  185.199.110.153
+     A   (nome em branco)  185.199.111.153
+     CNAME  www            SEU-USUARIO.github.io
+   Troque SEU-USUARIO pelo seu nome de usuário do GitHub.
+
+5. ESPERAR
+   Propagação de minutos a algumas horas. O certificado sai sozinho depois.
+
+PARA ATUALIZAR O SITE DEPOIS
+   Repositório > Add file > Upload files > arraste os arquivos alterados.
+   Publica em segundos, quantas vezes quiser.
+
+OBSERVAÇÕES
+- O formulário não depende de servidor: abre o WhatsApp com a mensagem pronta.
+- Enquanto o DNS não migrar, o site fica acessível em
+  SEU-USUARIO.github.io/entreformas
+- Se preferir manter a Netlify, basta esperar o ciclo de créditos reiniciar.
