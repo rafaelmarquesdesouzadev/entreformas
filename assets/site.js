@@ -188,8 +188,10 @@
   }
 
   // ---- PT / EN
+  // O idioma salvo vale em qualquer página, tenha ela botão ou não: quem está
+  // navegando em inglês e cai numa página sem .idioma continua em inglês.
   var btn=document.querySelector('.idioma');
-  if(btn && window.EN){
+  if(window.EN){
     var pt={};
     function coletar(){
       document.querySelectorAll('[data-i18n]').forEach(function(el){
@@ -209,7 +211,7 @@
         if(v)el.setAttribute('placeholder',v);
       });
       doc.lang=idioma==='en'?'en':'pt-BR';
-      btn.textContent=idioma==='en'?'PT':'EN';
+      if(btn)btn.textContent=idioma==='en'?'PT':'EN';
       try{localStorage.setItem('ef_idioma',idioma)}catch(x){}
       medir();
     }
@@ -217,7 +219,7 @@
     var salvo='pt';
     try{salvo=localStorage.getItem('ef_idioma')||'pt'}catch(x){}
     if(salvo==='en')aplicar('en');
-    btn.addEventListener('click',function(){
+    if(btn)btn.addEventListener('click',function(){
       aplicar(doc.lang==='en'?'pt':'en');
     });
   }
