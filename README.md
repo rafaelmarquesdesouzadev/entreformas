@@ -1,68 +1,86 @@
-# Entre Formas — site (v3)
+# Entre Formas — site
 
-Estático, sem build. Abra `index.html` no navegador.
+Site institucional da **Entre Formas, Arquitetura e Construções Ltda.**
+Estático, sem build, sem dependências. Abra `index.html` no navegador para ver local.
+
+Publicado em **https://entreformas.arq.br** via GitHub Pages (branch `main`, pasta raiz).
 
 ## Páginas
-index.html ............ home curta: abertura, obra em destaque, o que somos,
-                        quatro portas de navegação
-obras.html ............ índice de obras em linhas, com prévia no hover
-obra-apartamento.html   modelo de página de obra (duplicar para novas)
-obra-casa.html
-obra-marcenaria.html
-empresa.html .......... a lacuna papel/canteiro, dados institucionais,
-                        cinco frentes, contrato único x separado
-percurso.html ......... faixa horizontal das 5 etapas, cronograma e planilha
-                        desenhados, relatório e vistoria explicados, dúvidas
-contato.html .......... formulário, canais, selos e os três passos
-obrigado.html ......... pós-envio do formulário
 
-## Dados reais já aplicados
-CNPJ 49.900.868/0001-37 · em atividade desde 2020
-Responsável técnico: Lucas Dias, arquiteto — CAU A271613-5
-WhatsApp (11) 96585-7037 · entreformas.contato@gmail.com
-Instagram @entreformas (texto sem link — confirmar se o perfil existe)
-Endereço da sede: não divulgado, conforme pedido
+| Arquivo | Conteúdo |
+|---|---|
+| `index.html` | Home — porta de entrada estática, sem rolagem |
+| `obras.html` | Índice das quatro obras, com prévia no hover |
+| `obra-escritorio.html` | Comercial Pompéia |
+| `obra-apartamento.html` | Apartamento Tito |
+| `obra-reforma-completa.html` | Apartamento Sousa Dias |
+| `obra-apartamento-compacto.html` | Apartamento Passarelli |
+| `empresa.html` | Institucional e comparação entre contrato único e separado |
+| `percurso.html` | Cinco etapas da obra, cronograma, planilha e dúvidas |
+| `contato.html` | Formulário, canais e faixa de fotos |
+| `obrigado.html` | Fora do fluxo — o formulário abre o WhatsApp |
 
-## O que ainda falta (procure por class="vazio" no HTML)
-Nome, bairro, área, prazo, período e crédito de fotografia de cada obra;
-texto de cada obra; fornecedores; RPJ da empresa no CAU, se existir.
+## Assets
+
+```
+assets/styles.css      estilos do site inteiro
+assets/site.js         navegação, menu, formulário, troca de idioma
+assets/i18n.js         dicionário EN, indexado por data-i18n
+assets/escultura.js    animação de fundo da home (12 módulos SVG, ciclo de 24s)
+img/obra1..obra4/      48 fotos autorais
+og.jpg                 imagem de compartilhamento, 1200x630
+favicon.svg
+CNAME                  entreformas.arq.br
+.nojekyll              impede o GitHub de processar o site com Jekyll
+robots.txt
+```
 
 ## PT / EN
-O português está no HTML; o inglês em `assets/i18n.js`, indexado pelos
-atributos `data-i18n`. O botão EN no menu troca na hora e guarda a escolha.
-Ao editar um texto em português, atualize a chave correspondente no i18n.js.
-Páginas de obra ficam só em português, como combinado.
 
-## Publicar na Netlify
-Projeto entre-formas > Deploys > arraste esta pasta (ou o .zip).
-Depois do primeiro deploy: Forms > Form notifications > notificação por
-e-mail para entreformas.contato@gmail.com.
-Atenção: a equipe está com "exigir login SSO" ligado — desligue em
-Site configuration > Visitor access, ou o site abre pedindo login.
+O português fica no HTML e o inglês em `assets/i18n.js`, indexado pelos atributos
+`data-i18n`. O botão EN troca na hora, guarda a escolha em `localStorage` e atualiza
+o atributo `lang` do `<html>`.
 
-## Domínio
-entreformas.arq.br — registrado no registro.br em nome do Lucas (CPF).
-Endereço oficial do site: https://www.entreformas.arq.br
-Canonical e og:url de todas as páginas já apontam para esse endereço.
+**Ao editar um texto em português, atualize a chave correspondente no `i18n.js`.**
 
-Ligar o domínio na Netlify (uma vez):
-1. Netlify > projeto entre-formas > Domain management > Add a domain
-   > digite entreformas.arq.br (a Netlify adiciona o www junto)
-2. No registro.br, em Editar zona / DNS do domínio, crie:
-   - A     @ (ou em branco)  ->  75.2.60.5
-   - CNAME www               ->  entre-formas.netlify.app
-3. Espere a propagação (algumas horas, até 48h no limite) e confirme em
-   Domain management. O certificado HTTPS é emitido pela Netlify sozinho.
-Alternativa: apontar os nameservers do domínio para a Netlify DNS, que
-gerencia os registros automaticamente — só faça isso se não for usar
-e-mail no domínio por outro serviço.
+## Formulário
 
-## Trocar as fotos
-Substitua os arquivos de `img/` mantendo os nomes (obra-01 a obra-12).
-JPG, até 1600px no maior lado, ~300KB.
+Não depende de servidor. Valida nome e telefone, monta a mensagem no idioma em que
+o site está e abre o WhatsApp (`wa.me`) já preenchido. Há um link alternativo que
+abre o e-mail.
 
-## Percurso horizontal
-Seção `#percurso` no percurso.html. A altura é calculada pelo JS: a rolagem
-vertical vira movimento lateral. Para mudar o ritmo, altere a largura dos
-painéis em `.painel { width: ... }` no styles.css. No celular vira faixa
-deslizante com encaixe.
+## Publicar uma atualização
+
+Pelo navegador: repositório > **Add file** > **Upload files** > arraste o **conteúdo**
+da pasta (não a pasta) > **Commit changes**. Publica em segundos.
+
+> O upload pelo navegador **ignora arquivos ocultos**, então o `.nojekyll` não sobe
+> por esse caminho. Se ele sumir, recrie por **Add file > Create new file** com o nome
+> `.nojekyll` e conteúdo vazio.
+
+Por linha de comando:
+
+```bash
+git clone https://github.com/rafaelmarquesdesouzadev/entreformas.git
+# edite os arquivos
+git add -A && git commit -m "atualiza site" && git push
+```
+
+## Domínio e DNS
+
+`entreformas.arq.br` está registrado no registro.br. A zona aponta para o GitHub Pages:
+
+```
+A      (nome vazio)   185.199.108.153
+A      (nome vazio)   185.199.109.153
+A      (nome vazio)   185.199.110.153
+A      (nome vazio)   185.199.111.153
+CNAME  www            rafaelmarquesdesouzadev.github.io
+```
+
+O certificado HTTPS é emitido pelo próprio GitHub. Quando ficar disponível, marque
+**Enforce HTTPS** em Settings > Pages.
+
+## Contato
+
+WhatsApp (11) 96585-7037 · entreformas.contato@gmail.com · Instagram [@entre1formas](https://www.instagram.com/entre1formas)

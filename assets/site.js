@@ -153,6 +153,23 @@
     fc.addEventListener('input',function(){avisar('')});
   }
 
+
+  // ---- ampliar foto ao clicar
+  if(document.querySelector('.fotos-obra')){
+    var lupa=document.createElement('div'); lupa.id='lupa';
+    lupa.innerHTML='<span class="fechar" aria-hidden="true">✕</span><img alt="">';
+    document.body.appendChild(lupa);
+    var grande=lupa.querySelector('img');
+    document.addEventListener('click',function(e){
+      var img=e.target.closest?e.target.closest('.fotos-obra img'):null;
+      if(img){ grande.src=img.src; grande.alt=img.alt||''; lupa.classList.add('on'); }
+      else if(lupa.classList.contains('on')) lupa.classList.remove('on');
+    });
+    addEventListener('keydown',function(e){
+      if(e.key==='Escape') lupa.classList.remove('on');
+    });
+  }
+
   // ---- formulário
   var form=document.querySelector('form[data-valida]');
   if(form){

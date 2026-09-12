@@ -13,7 +13,7 @@
       ROTEIRO=[[0,'A'],[TR,'B'],[2*TR,'C'],[3*TR,'D'],[4*TR,'E'],
                [4*TR+PAUSA,'E'],[5*TR+PAUSA,'D'],[6*TR+PAUSA,'C'],
                [7*TR+PAUSA,'B'],[1,'A']],
-      t0=performance.now(), rodando=true;
+      t0=performance.now(), rodando=true, ultimaOrdem='', ultimoQuadro=0;
 
   var pecas=DADOS.map(function(d,i){
     var g=document.createElementNS(NS,'g');
@@ -21,7 +21,7 @@
       p.setAttribute('fill',cor); g.appendChild(p); return p;}
     var lado=face('#1A5078'), topo=face('#5DA8CE'), frente=face('#2C6E9E');
     svg.appendChild(g);
-    return {d:d,g:g,frente:frente,topo:topo,lado:lado,
+    return {d:d,g:g,frente:frente,topo:topo,lado:lado,i:i,pesoAnterior:-1,
             atraso:(i%4)*0.014+Math.floor(i/4)*0.012};
   });
 
@@ -65,17 +65,27 @@
       pc.lado.setAttribute('points',  pts([[x+w,y],[x+w+ox,y-oy],[x+w+ox,y+h-oy],[x+w,y+h]]));
       pc.g.setAttribute('opacity',(OPAC[s.de]+(OPAC[s.para]-OPAC[s.de])*t).toFixed(3));
       var peso=(s.de==='E'?1-t:0)+(s.para==='E'?t:0), alvo=CORE[pc.d.cor];
-      pc.frente.setAttribute('fill',mistura('#2C6E9E',alvo,peso));
-      pc.topo.setAttribute('fill',  mistura('#5DA8CE',alvo,peso));
-      pc.lado.setAttribute('fill',  mistura('#1A5078',alvo,peso));
-      ordem.push({g:pc.g, ordem:(peso>0.5?pc.d.z:0)*1e6+(y+h)*1000-x});
+      var pesoArred=Math.round(peso*20)/20;       // 20 degraus bastam para o olho
+      if(pesoArred!==pc.pesoAnterior){
+        pc.pesoAnterior=pesoArred;
+        pc.frente.setAttribute('fill',mistura('#2C6E9E',alvo,pesoArred));
+        pc.topo.setAttribute('fill',  mistura('#5DA8CE',alvo,pesoArred));
+        pc.lado.setAttribute('fill',  mistura('#1A5078',alvo,pesoArred));
+      }
+      ordem.push({g:pc.g, i:pc.i, ordem:(peso>0.5?pc.d.z:0)*1e6+(y+h)*1000-x});
     });
     ordem.sort(function(a,b){return a.ordem-b.ordem});
-    ordem.forEach(function(e){svg.appendChild(e.g)});
+    var assinatura=ordem.map(function(e){return e.i}).join(',');
+    if(assinatura!==ultimaOrdem){                 // reempilhar custa caro: só quando muda
+      ultimaOrdem=assinatura;
+      ordem.forEach(function(e){svg.appendChild(e.g)});
+    }
   }
 
   function quadro(agora){
     if(rodando) requestAnimationFrame(quadro);
+    if(agora-ultimoQuadro < 33) return;          // ~30 fps bastam para um movimento lento
+    ultimoQuadro=agora;
     desenhar(((agora-t0)%CICLO)/CICLO);
   }
   document.addEventListener('visibilitychange',function(){   // poupa bateria em aba oculta
@@ -83,6 +93,7 @@
     else if(!reduz){rodando=true; t0=performance.now(); requestAnimationFrame(quadro);}
   });
 
-  if(reduz){ desenhar(0); }                 // movimento reduzido: fica no grid
+  var estreito=!!(window.matchMedia&&window.matchMedia('(max-width:820px)').matches);
+  if(reduz||estreito){ desenhar(0); }       // movimento reduzido ou celular: fica no grid
   else requestAnimationFrame(quadro);
 })();
